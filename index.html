@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Ashuu ❤️</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050105;
+    color:#fff;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   SUBTLE FILM GRAIN
+===================================================== */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:500;
+    opacity:.025;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+
+/* =====================================================
+   PASSWORD SCREEN
+===================================================== */
+
+#lockScreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(190,15,70,.25),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(100,0,40,.2),
+            transparent 35%
+        ),
+        #070207;
+
+    transition:opacity 1.4s ease;
+}
+
+.lockBox{
+    width:min(90%,450px);
+
+    padding:48px 30px;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:30px;
+
+    background:rgba(255,255,255,.045);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    animation:boxIn 1.2s ease;
+}
+
+@keyframes boxIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.lockHeart{
+    font-size:55px;
+    margin-bottom:20px;
+
+    animation:heartbeat 1.6s infinite;
+}
+
+.lockBox h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:44px;
+    font-weight:500;
+}
+
+.lockUrdu{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:21px;
+    line-height:2.3;
+
+    color:rgba(255,255,255,.75);
+
+    margin:15px 0;
+}
+
+.lockHint{
+    font-size:9px;
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.35);
+
+    margin-bottom:24px;
+}
+
+.passwordInput{
+    width:100%;
+
+    padding:16px 18px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background:rgba(0,0,0,.3);
+
+    color:#fff;
+
+    outline:none;
+
+    text-align:center;
+
+    font-size:15px;
+
+    margin-bottom:13px;
+
+    transition:.3s;
+}
+
+.passwordInput:focus{
+    border-color:rgba(255,70,120,.7);
+
+    box-shadow:
+        0 0 25px rgba(255,40,100,.12);
+}
+
+.unlockBtn,
+.revealBtn{
+    border:0;
+
+    padding:15px 30px;
+
+    border-radius:50px;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4b73,
+            #a8003b
+        );
+
+    box-shadow:
+        0 10px 35px rgba(255,30,90,.22);
+
+    transition:.35s;
+}
+
+.unlockBtn:hover,
+.revealBtn:hover{
+    transform:translateY(-3px) scale(1.04);
+
+    box-shadow:
+        0 15px 45px rgba(255,30,90,.35);
+}
+
+#error{
+    display:none;
+
+    margin-top:14px;
+
+    font-size:12px;
+
+    color:#ff6486;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+#main{
+    display:none;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    min-height:100vh;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(150,0,55,.28),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,30,90,.06),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #060106,
+            #21030e,
+            #060106
+        );
+}
+
+.glow{
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    border-radius:50%;
+
+    background:rgba(255,20,90,.06);
+
+    filter:blur(90px);
+
+    animation:glowMove 8s ease-in-out infinite;
+}
+
+@keyframes glowMove{
+
+    0%,100%{
+        transform:translate(-100px,-30px);
+    }
+
+    50%{
+        transform:translate(100px,50px);
+    }
+}
+
+.heroContent{
+    position:relative;
+    z-index:5;
+
+    padding:30px;
+}
+
+.eyebrow{
+    text-transform:uppercase;
+
+    letter-spacing:5px;
+
+    font-size:10px;
+
+    color:rgba(255,255,255,.45);
+
+    margin-bottom:28px;
+}
+
+.hero h1{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(75px,17vw,145px);
+
+    line-height:.8;
+
+    font-weight:500;
+}
+
+.hero h1 span{
+    color:#ff4d75;
+    font-style:italic;
+}
+
+.heroUrdu{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:clamp(25px,5vw,39px);
+
+    line-height:2.3;
+
+    margin-top:36px;
+
+    color:rgba(255,255,255,.85);
+
+    text-shadow:
+        0 0 30px rgba(255,40,100,.15);
+}
+
+.heroSub{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:21px;
+
+    color:rgba(255,255,255,.48);
+
+    margin-top:15px;
+}
+
+.scroll{
+    position:absolute;
+
+    bottom:28px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.3);
+}
+
+.scroll::after{
+    content:"↓";
+
+    display:block;
+
+    font-size:18px;
+
+    margin-top:9px;
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section{
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:100px 22px;
+}
+
+.sectionInner{
+    width:min(900px,100%);
+
+    text-align:center;
+}
+
+.label{
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    font-size:9px;
+
+    color:#ff5279;
+
+    margin-bottom:17px;
+}
+
+.sectionTitle{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(45px,9vw,75px);
+
+    font-weight:500;
+
+    line-height:1;
+
+    margin-bottom:35px;
+}
+
+.urduTitle{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:clamp(29px,6vw,46px);
+
+    line-height:2.2;
+
+    margin-bottom:30px;
+}
+
+
+/* =====================================================
+   TYPEWRITER
+===================================================== */
+
+.typeText{
+    max-width:700px;
+
+    margin:auto;
+
+    min-height:150px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(21px,4vw,29px);
+
+    line-height:1.7;
+
+    color:rgba(255,255,255,.78);
+}
+
+
+/* =====================================================
+   URDU QUOTES
+===================================================== */
+
+.urduQuoteBox{
+    margin:60px auto;
+
+    padding:50px 25px;
+
+    border-top:
+        1px solid rgba(255,70,110,.18);
+
+    border-bottom:
+        1px solid rgba(255,70,110,.18);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,40,90,.06),
+            transparent 65%
+        );
+}
+
+.urduQuote{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:clamp(25px,5vw,38px);
+
+    line-height:2.5;
+
+    color:rgba(255,255,255,.9);
+
+    text-shadow:
+        0 0 25px rgba(255,50,100,.1);
+}
+
+.quoteSmall{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:17px;
+
+    color:rgba(255,255,255,.38);
+
+    margin-top:20px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:45px;
+}
+
+.card{
+    min-height:210px;
+
+    padding:30px 20px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+
+    border-radius:22px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:blur(15px);
+
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+
+    border-color:
+        rgba(255,70,110,.3);
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+.cardIcon{
+    font-size:32px;
+
+    margin-bottom:18px;
+}
+
+.card h3{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:27px;
+
+    margin-bottom:8px;
+}
+
+.card p{
+    font-size:11px;
+
+    line-height:1.7;
+
+    color:rgba(255,255,255,.45);
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+.letter{
+    text-align:left;
+
+    padding:clamp(25px,5vw,55px);
+
+    border-left:
+        1px solid rgba(255,70,110,.45);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035),
+            transparent
+        );
+
+    position:relative;
+}
+
+.letter::before{
+    content:"“";
+
+    position:absolute;
+
+    top:-35px;
+    left:10px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:100px;
+
+    color:rgba(255,60,110,.15);
+}
+
+.letter p{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(19px,4vw,23px);
+
+    line-height:1.9;
+
+    color:rgba(255,255,255,.78);
+
+    margin-bottom:22px;
+}
+
+.urduLetter{
+    font-family:'Noto Nastaliq Urdu',serif !important;
+
+    font-size:clamp(21px,4.5vw,29px) !important;
+
+    line-height:2.6 !important;
+
+    direction:rtl;
+
+    text-align:right;
+
+    color:rgba(255,255,255,.9) !important;
+
+    padding:15px 0 25px;
+}
+
+.signature{
+    text-align:right;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:30px;
+
+    color:#ff6485;
+}
+
+
+/* =====================================================
+   CONFESSION
+===================================================== */
+
+.confession{
+    padding:55px 25px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.3);
+}
+
+.confession h2{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:48px;
+
+    margin-bottom:25px;
+}
+
+.confession p{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:clamp(22px,5vw,31px);
+
+    line-height:2.6;
+
+    color:rgba(255,255,255,.82);
+}
+
+
+/* =====================================================
+   FINAL SURPRISE
+===================================================== */
+
+.surprise{
+    padding:65px 25px;
+
+    border-radius:32px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,30,90,.08),
+            transparent 60%
+        );
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.3);
+}
+
+.gift{
+    font-size:72px;
+
+    margin-bottom:25px;
+
+    animation:
+        floating 3s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-13px);
+    }
+}
+
+#finalMessage{
+    display:none;
+
+    margin-top:40px;
+
+    animation:finalReveal 1.5s ease;
+}
+
+@keyframes finalReveal{
+
+    from{
+        opacity:0;
+        transform:scale(.9) translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+#finalMessage h2{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(60px,13vw,100px);
+
+    font-weight:500;
+
+    color:#ff5279;
+}
+
+.finalEnglish{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(22px,5vw,30px);
+
+    line-height:1.7;
+
+    margin-top:20px;
+
+    color:rgba(255,255,255,.8);
+}
+
+.finalUrdu{
+    font-family:'Noto Nastaliq Urdu',serif;
+
+    font-size:clamp(24px,5vw,34px);
+
+    line-height:2.6;
+
+    margin-top:30px;
+
+    color:#fff;
+}
+
+.infinity{
+    font-size:45px;
+
+    margin-top:30px;
+
+    color:#ff5279;
+
+    animation:
+        heartbeat 1.8s infinite;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:rgba(255,255,255,.3);
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+
+/* =====================================================
+   HEARTS
+===================================================== */
+
+.heart{
+    position:fixed;
+
+    bottom:-40px;
+
+    pointer-events:none;
+
+    z-index:300;
+
+    opacity:0;
+
+    animation:rise linear forwards;
+}
+
+@keyframes rise{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0)
+            scale(.6);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:
+            translateY(-115vh)
+            rotate(360deg)
+            scale(1.2);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+.sparkle{
+    position:fixed;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    animation:
+        sparkleAnim 4s linear forwards;
+}
+
+@keyframes sparkleAnim{
+
+    0%{
+        opacity:0;
+        transform:scale(.3);
+    }
+
+    30%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1.8);
+    }
+}
+
+
+/* =====================================================
+   HEARTBEAT
+===================================================== */
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.16);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        min-height:160px;
+    }
+
+    section{
+        padding:85px 18px;
+    }
+
+    .letter{
+        padding:27px 20px;
+    }
+
+    .heroUrdu{
+        margin-top:30px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PASSWORD
+===================================================== -->
+
+<div id="lockScreen">
+
+    <div class="lockBox">
+
+        <div class="lockHeart">
+            🔐
+        </div>
+
+        <h1>
+            A little secret...
+        </h1>
+
+        <div class="lockUrdu">
+            یہ صرف آپ کے لیے ہے ❤️
+        </div>
+
+        <div class="lockHint">
+            ENTER THE SECRET PASSWORD
+        </div>
+
+        <input
+            id="password"
+            class="passwordInput"
+            type="password"
+            placeholder="Password"
+            autocomplete="off"
+        >
+
+        <button
+            class="unlockBtn"
+            onclick="unlock()"
+        >
+            Unlock ❤️
+        </button>
+
+        <div id="error">
+            Wrong password... try again 👀
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div id="main">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="glow"></div>
+
+    <div class="heroContent">
+
+        <div class="eyebrow">
+            A little something from Musti
+        </div>
+
+        <h1>
+            For <span>Ashuu</span>
+        </h1>
+
+        <div class="heroUrdu">
+            آپ میرے لیے بہت خاص ہیں
+        </div>
+
+        <div class="heroSub">
+            Some feelings deserve more than a message.
+        </div>
+
+    </div>
+
+    <div class="scroll">
+        SCROLL
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section>
+
+    <div class="sectionInner">
+
+        <div class="label">
+            Dear Ashuu
+        </div>
+
+        <h2 class="sectionTitle">
+            I have something to tell you...
+        </h2>
+
+        <div
+            id="typeText"
+            class="typeText"
+        ></div>
+
+
+        <div class="urduQuoteBox">
+
+            <div class="urduQuote">
+
+                کچھ لوگ زندگی میں اتفاق سے ملتے ہیں،
+                <br>
+
+                مگر پھر زندگی کا سب سے خوبصورت حصہ بن جاتے ہیں۔
+
+            </div>
+
+            <div class="quoteSmall">
+
+                اور آپ اُنہی لوگوں میں سے ہیں ❤️
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     US
+===================================================== -->
+
+<section>
+
+    <div class="sectionInner">
+
+        <div class="label">
+            Us
+        </div>
+
+        <h2 class="sectionTitle">
+            It's not just one day.
+        </h2>
+
+        <div class="urduTitle">
+            یہ صرف ایک دن کی بات نہیں
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    🌙
+                </div>
+
+                <h3>
+                    The talks
+                </h3>
+
+                <p>
+                    The random conversations that somehow
+                    become the best part of my day.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    😂
+                </div>
+
+                <h3>
+                    The laughs
+                </h3>
+
+                <p>
+                    The moments that make no sense to anyone
+                    else but somehow make us laugh.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    ❤️
+                </div>
+
+                <h3>
+                    The feeling
+                </h3>
+
+                <p>
+                    That quiet feeling of knowing there is
+                    someone who means this much to me.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     URDU POETRY
+===================================================== -->
+
+<section>
+
+    <div class="sectionInner">
+
+        <div class="label">
+            کچھ الفاظ آپ کے لیے
+        </div>
+
+
+        <div class="urduQuoteBox">
+
+            <div class="urduQuote">
+
+                آپ کو سوچوں تو دل کو سکون سا ملتا ہے،
+                <br>
+
+                جیسے کسی دعا کا جواب ملتا ہے۔
+
+                <br><br>
+
+                آپ ساتھ ہوں تو ہر لمحہ خاص لگتا ہے،
+                <br>
+
+                آپ نہ ہوں تو سب کچھ ادھورا سا لگتا ہے۔
+
+            </div>
+
+        </div>
+
+
+        <div class="urduQuoteBox">
+
+            <div class="urduQuote">
+
+                محبت صرف ساتھ رہنے کا نام نہیں،
+                <br>
+
+                محبت تو وہ احساس ہے
+                <br>
+
+                جو فاصلے میں بھی ساتھ رہتا ہے۔ ❤️
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LOVE LETTER
+===================================================== -->
+
+<section>
+
+    <div class="sectionInner">
+
+        <div class="label">
+            A letter from Musti
+    
